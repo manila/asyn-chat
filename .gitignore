@@ -114,3 +114,6 @@ dist
 .yarn/build-state.yml
 .yarn/Ginstall-state.gz
 .pnp.*
+
+# compiled code
+build/
