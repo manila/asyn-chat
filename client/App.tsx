@@ -21,11 +21,11 @@ interface IMessageData {
 	color?: number;
 }
 
-const subject = webSocket("ws://" + window.location.host);
+const subject = webSocket("wss://" + window.location.host);
 
 subject.subscribe();
 
-const username = prompt() as string;
+const username = prompt("enter your desired username:") as string;
 
 const user: IMessageData = {
 	text: username,

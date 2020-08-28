@@ -7,7 +7,7 @@ let message2: Array<IMessageData> = [];
 let clients: Array<IClient> = [];
 const users: Array<string> = [];
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
@@ -32,7 +32,6 @@ interface IMessageData {
 wss.on("connection", (ws: any, req: any) => {
 	ws.on("message", (message: any) => {
 		try {
-			console.log(message);
 			const msg: IMessage = JSON.parse(message);
 
 			if (msg.type == "join") {
@@ -56,8 +55,6 @@ wss.on("connection", (ws: any, req: any) => {
 					)
 				);
 
-				console.log("sent to clients");
-				console.log(msg.data[0].text + " Joined!");
 			} else if (msg.type == "char") {
 				msg.data.forEach((e: IMessageData) => {
 					e.color = clients.find(({ socket }) => ws === socket)!.data.color;
@@ -89,7 +86,6 @@ wss.on("connection", (ws: any, req: any) => {
 		clients = clients.filter(
 			({ socket, data }) => ws != socket
 		);
-		console.log(clients);
 		clients.forEach(({ socket }) => {
 			socket.send(
 				JSON.stringify({
