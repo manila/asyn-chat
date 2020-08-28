@@ -4,6 +4,7 @@
 		"module": "commonjs",
 		"outDir": "./public",
 		"strict": true,
+		"jsx": "react",
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true

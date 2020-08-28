@@ -3,11 +3,17 @@ const path = require("path");
 
 module.exports = {
 	mode: "development",
-	watch: true,
-	entry: "./client/index.ts",
+	entry: "./client/index.tsx",
+	devServer: {
+		contentBase: path.join(__dirname, 'client'),
+		publicPath: '/build/public',
+		contentBasePublicPath: '/',
+		liveReload: true,
+		port: 8000
+	},
 	output: {
 		path: __dirname + "/build/public",
-		publicPath: "./",
+		publicPath: "/",
 		filename: "main.js"
 	},
 	plugins: [
@@ -17,12 +23,19 @@ module.exports = {
 		})
 	],
 	resolve: {
-		extensions: [".ts", ".js"]
+		extensions: [".tsx", ".ts", ".js"]
 	},
 	module: {
-		rules: [
+		rules: [{
+				test: /\.scss$/,
+				use: [
+					'style-loader',
+					'css-loader',
+					'sass-loader'
+				]
+			},
 			{
-				test: /\.ts$/,
+				test: /\.tsx?$/,
 				exclude: ["/node_modules/", "/server"],
 				loader: "ts-loader",
 				options: { configFile: "tsconfig.client.json" }

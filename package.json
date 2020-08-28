@@ -8,24 +8,37 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
+		"start:client": "webpack-dev-server --config webpack.config.js",
 		"start": "webpack --watch & tsc --watch --project tsconfig.server.json & nodemon ./build/server.js",
 		"build": "webpack && tsc --project tsconfig.server.json"
 	},
 	"devDependencies": {
 		"@types/express": "^4.17.7",
 		"@types/node": "^14.6.0",
+		"@types/react": "^16.9.47",
+		"css-loader": "^4.2.2",
 		"html-webpack-plugin": "^4.3.0",
 		"node": "^14.8.0",
 		"nodemon": "^2.0.4",
 		"prettier": "^2.0.5",
+		"sass": "^1.26.10",
+		"sass-loader": "^10.0.0",
+		"style-loader": "^1.2.1",
 		"ts-loader": "^8.0.2",
 		"typescript": "^3.9.7",
 		"typescript-cli": "^0.1.0",
 		"webpack": "^4.44.1",
-		"webpack-cli": "^3.3.12"
+		"webpack-cli": "^3.3.12",
+		"webpack-dev-server": "^3.11.0"
 	},
 	"dependencies": {
+		"@types/react-dom": "^16.9.8",
+		"@types/ws": "^7.2.6",
 		"express": "^4.17.1",
-		"rxjs": "^6.6.2"
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"rxjs": "^6.6.2",
+		"websocket": "^1.0.31",
+		"ws": "^7.3.1"
 	}
 }
