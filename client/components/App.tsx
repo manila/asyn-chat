@@ -6,60 +6,26 @@ import React, {
 	createContext
 } from "react";
 
+import { useSubject } from "./hooks";
+
+import "./App.scss";
+
 import { webSocket } from "rxjs/webSocket";
 import { fromEvent } from "rxjs";
 
 import UserPrompt from "./UserPrompt";
 import UserList from "./UserList";
-import Chat from "./Chat";
-import "./App.scss";
+import ChatInput from "./ChatInput";
 
-interface IClient {
-	username: string;
-	socket: WebSocket;
-}
-
-interface IMessage {
-	type: string;
-	data: Array<IMessageData>;
-	time: number;
-}
-
-interface IMessageData {
-	text: string;
-	time?: number;
-	color?: number;
-}
+import { IMessage, IMessageData } from "./MessageInterface";
 
 const host = window.location.host;
 const protocol = /s:$/.test(window.location.protocol) ? "s" : "";
 const websocket = webSocket(`ws${protocol}://${host}`);
-
 websocket.subscribe();
 
 const App = () => {
 	const [user, setUser] = useState({});
-	const [users, setUsers] = useState([]);
-	const [data, setData] = useState([
-		{ text: "start typing here...", color: 999999, time: Date.now() + 1000 * 3600 * 60 }
-	]);
-
-	useEffect(() => {
-		const sub = websocket.subscribe(messageReceive);
-		return () => sub.unsubscribe();
-	}, []);
-
-	const messageReceive = (msg: any) => {
-		switch (msg.type) {
-			case "join":
-				setUsers(msg.data);
-				break;
-			case "char2":
-				setData(msg.data);
-				break;
-			default:
-		}
-	};
 
 	const joinChat = (username: string) => {
 		const user: IMessageData = {
@@ -86,10 +52,9 @@ const App = () => {
 					websocket={websocket}
 				/>
 			)}
-			<UserList users={users} />
+			<UserList websocket={websocket} />
 			{user.hasOwnProperty("text") && (
-				<Chat
-					data={data}
+				<ChatInput
 					user={user}
 					websocket={websocket}
 				/>
