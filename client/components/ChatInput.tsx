@@ -58,7 +58,7 @@ const ChatInput = (props: any) => {
 		element && element.focus();
 	});
 
-	useEffect(() => useSubject(websocket, messageReceive));
+	useEffect(() => useSubject(websocket, messageReceive), []);
 
 	return (
 		<div
