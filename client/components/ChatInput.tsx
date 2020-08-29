@@ -73,8 +73,8 @@ const ChatInput = (props: any) => {
 		<div
 			ref={chatInput}
 			id={"chat-container"}
+			style={{ "caret-color": "#" + user.color } as React.CSSProperties}
 			spellCheck={false}
-			placeholder={"start typing here..."}
 			onKeyDown={handleChatInput}
 			contentEditable={true}
 			suppressContentEditableWarning={true}
