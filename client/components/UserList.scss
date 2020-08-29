@@ -1,0 +1,19 @@
+div#user-container {
+	background: #fff;
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+div#user-container {
+	ul {
+		list-style: none;
+		width: 100%;
+		margin: 0px;
+	}
+	li {
+		font-size: 1.5rem;
+		padding: 2.5rem;
+		display: inline;
+	}
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./UserList.scss";
 
 const UserList = (props: any) => {
 	const { users } = props;

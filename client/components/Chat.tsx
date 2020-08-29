@@ -1,12 +1,13 @@
 import React from "react";
+import "./Chat.scss";
 
 const Chat = (props: any) => {
-	const { subject } = props;
+	const { websocket } = props;
 
 	const handleChatInput = (event: any) => {
 		event.preventDefault();
 		if (event.key.length === 1) {
-			subject.next({
+			websocket.next({
 				type: "char",
 				data: [{ text: event.key }],
 				time: Date.now()
@@ -31,6 +32,7 @@ const Chat = (props: any) => {
 			id={"chat-container"}
 			onKeyDown={handleChatInput}
 			spellCheck={false}
+			placeholder={"start typing here..."}
 		>
 			{ parseChars() }
 		</div>

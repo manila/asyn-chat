@@ -1,0 +1,14 @@
+div#chat-container {
+	font-size: 2rem;
+	width: 44ch;
+	height: 2.5rem;
+	border-bottom: 0.20rem dotted #444;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-2rem) translateX(-22ch);
+}
+
+div#chat-container p {
+	padding: 1em;
+}

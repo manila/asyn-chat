@@ -1,0 +1,31 @@
+div#user-prompt {
+	z-index: 99;
+	font-family: monospace;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border: 50vw solid #ffffff;
+	background: #fff;
+}
+
+div#user-prompt input[type="text"] {
+	width: 15ch;
+	font-size: 2vw;
+	border-width: 0px 0px 0.20vw 0px;
+	border-style: dotted;
+	border-color: #000;
+}
+
+button {
+	color: #fff;
+	background: #4CAF50;
+	font-size: 1.5vw;
+	font-weight: bold;
+	border-width: 0px;
+	width: 10ch;
+	padding: 0.5vw;
+	text-align: center;
+	margin: 1vw auto;
+	display: block;
+}
