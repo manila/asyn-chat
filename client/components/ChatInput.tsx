@@ -14,19 +14,28 @@ const ChatInput = (props: any) => {
 	]);
 
 	const handleChatInput = (event: any) => {
-		event.preventDefault();
+		const now = Date.now();
+		const local = data;
 
 		if (event.key.length === 1) {
+			local.push({
+				type: "char",
+				data: [{ text: event.key, time: now }],
+				time: now
+			} as any);
+			setData(local);
 			websocket.next({
 				type: "char",
-				data: [{ text: event.key, time: Date.now() }],
-				time: Date.now()
+				data: [{ text: event.key, time: now }],
+				time: now
 			});
 		}
+
+		event.preventDefault();
 	};
 
 	const messageReceive = (message: any) => {
-		if ((message.type == "char2")) {
+		if (message.type == "char2") {
 			setData(message.data);
 		}
 	};
@@ -37,14 +46,14 @@ const ChatInput = (props: any) => {
 				({ time }: { time: number }) =>
 					time >= user.time
 			)
-			.map((d: any) => {
-				const { color, text, time } = d;
-				return (
-					<span key={time} style={{ color: "#" + color }}>
-						{text}
-					</span>
-				);
-			});
+			.reduce(
+				(acc: string, cur: any) =>
+					acc +
+					'<span style="color: #' +
+					(cur.color as string) +
+					`">${cur.text}</span>`,
+				""
+			);
 	};
 
 	useEffect(() => {
@@ -56,9 +65,9 @@ const ChatInput = (props: any) => {
 				element!.childElementCount
 			);
 		element && element.focus();
-	});
+	}, [data]);
 
-	useEffect(() => useSubject(websocket, messageReceive), []);
+	useEffect(() => useSubject(websocket, messageReceive), [data]);
 
 	return (
 		<div
@@ -69,9 +78,8 @@ const ChatInput = (props: any) => {
 			onKeyDown={handleChatInput}
 			contentEditable={true}
 			suppressContentEditableWarning={true}
-		>
-			{parseChars()}
-		</div>
+			dangerouslySetInnerHTML={{ __html: parseChars() }}
+		></div>
 	);
 };
 
