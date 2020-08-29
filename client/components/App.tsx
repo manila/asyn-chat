@@ -31,14 +31,18 @@ interface IMessageData {
 	color?: number;
 }
 
-const websocket = webSocket("ws://" + window.location.host);
+const host = window.location.host;
+const protocol = /s:$/.test(window.location.protocol) ? "s" : "";
+const websocket = webSocket(`ws${protocol}://${host}`);
 
 websocket.subscribe();
 
 const App = () => {
-	const [user, setUsername] = useState("");
+	const [user, setUser] = useState({});
 	const [users, setUsers] = useState([]);
-	const [data, setData] = useState([{ text: "start typing here...", color: 999999}]);
+	const [data, setData] = useState([
+		{ text: "start typing here...", color: 999999, time: Date.now() + 1000 * 3600 * 60 }
+	]);
 
 	useEffect(() => {
 		const sub = websocket.subscribe(messageReceive);
@@ -58,8 +62,6 @@ const App = () => {
 	};
 
 	const joinChat = (username: string) => {
-		setUsername(username);
-
 		const user: IMessageData = {
 			text: username,
 			time: Date.now(),
@@ -72,14 +74,26 @@ const App = () => {
 			time: Date.now()
 		};
 
+		setUser(user);
 		websocket.next(join);
 	};
 
 	return (
 		<>
-			{!user && <UserPrompt handleSubmit={joinChat} />}
+			{!user.hasOwnProperty("text") && (
+				<UserPrompt
+					handleSubmit={joinChat}
+					websocket={websocket}
+				/>
+			)}
 			<UserList users={users} />
-			<Chat data={data} websocket={websocket} />
+			{user.hasOwnProperty("text") && (
+				<Chat
+					data={data}
+					user={user}
+					websocket={websocket}
+				/>
+			)}
 		</>
 	);
 };

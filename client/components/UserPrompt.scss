@@ -10,9 +10,9 @@ div#user-prompt {
 }
 
 div#user-prompt input[type="text"] {
-	width: 15ch;
-	font-size: 2vw;
-	border-width: 0px 0px 0.20vw 0px;
+	width: 16ch;
+	font-size: 2rem;
+	border-width: 0px 0px 0.20rem 0px;
 	border-style: dotted;
 	border-color: #000;
 }
@@ -20,12 +20,12 @@ div#user-prompt input[type="text"] {
 button {
 	color: #fff;
 	background: #4CAF50;
-	font-size: 1.5vw;
+	font-size: 1.5rem;
 	font-weight: bold;
 	border-width: 0px;
 	width: 10ch;
-	padding: 0.5vw;
+	padding: 0.5rem;
 	text-align: center;
-	margin: 1vw auto;
+	margin: 0.5rem auto;
 	display: block;
 }

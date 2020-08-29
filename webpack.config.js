@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-	mode: "production",
+	mode: "development",
 	entry: "./client/index.tsx",
 	devServer: {
 		contentBase: path.join(__dirname, 'client'),
