@@ -4,7 +4,7 @@
 
 
 ## What is this?
-A chat application where you can interrupt or be interrupted and can't undo what you say, luckily your words leave the chat as you continue so you'll have to pay attention.
+An asynchronous chat application where you can interrupt or be interrupted and can't undo what you say, your words leave the chat as you continue so you'll have to pay attention.
 
 ## Live Demo
 
@@ -13,10 +13,11 @@ A live demo is [available on Glitch](https://interrupt-chat.glitch.me), you may 
 ## Tech Stack
 
 - TypeScript
+- RxJS
 - React
 - Node.js
 - Webpack
-- SCSS
+- SASS
 
 ## Install and Run Locally
 
